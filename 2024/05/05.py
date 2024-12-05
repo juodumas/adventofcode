@@ -4,27 +4,17 @@ updates = [list(map(int, pages.split(","))) for pages in updates.split()]
 s1 = s2 = 0
 
 def is_good(pages):
-    printed = set()
-    for i in range(1, len(pages)):
-        p0 = pages[i - 1]
-        p1 = pages[i]
-        if f"{p1}|{p0}" in rules or (f"{p0}|{p1}" in rules and p0 in printed):
-            return False
-    return True
+    return all(f"{p1}|{p2}" in rules for p1, p2 in zip(pages, pages[1:]))
 
 for pages in updates:
     if is_good(pages):
         s1 += pages[len(pages) // 2]
     else:
-        good = False
-        while not good:
-            for i in range(1, len(pages)):
-                p0 = pages[i-1]
-                p1 = pages[i]
-                if f"{p1}|{p0}" in rules:
-                    pages[i] = p0
-                    pages[i-1] = p1
-                    good = is_good(pages)
-                    break
+        while not is_good(pages):
+            for i, (p1, p2) in enumerate(zip(pages, pages[1:])):
+                if f"{p2}|{p1}" in rules:
+                    pages[i] = p2
+                    pages[i+1] = p1
         s2 += pages[len(pages) // 2]
+
 print(s1, s2)
