@@ -2,6 +2,7 @@
 !**/
 !*.gitignore
 !*.js
+!*.gif
 !*.png
 !*.py
 !*.sh
