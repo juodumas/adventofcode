@@ -14,8 +14,7 @@ for ant in ants:
         for j in range(i + 1, len(coords)):
             x1, y1 = coords[i]
             x2, y2 = coords[j]
-            z = 1
-            while z < sz:
+            for z in range(sz):
                 a1x = x1 + (z * (x2 - x1))
                 a1y = y1 + (z * (y2 - y1))
                 a2x = x2 + (z * (x2 - x1)) * -1
@@ -28,6 +27,5 @@ for ant in ants:
                     data[a2x][a2y] = '#'
                     if z == 2: anti_p1.add((a2x, a2y))
                     anti_p2.add((a2x, a2y))
-                z += 1
 for row in data: print(''.join(row))
 print('anti_p1', len(anti_p1), 'anti_p2', len(anti_p2))

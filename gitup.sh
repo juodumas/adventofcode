@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 git add .
+git diff --staged
 git status
 printf "commit & push? [yN] "
 read ans
