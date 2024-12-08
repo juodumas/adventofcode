@@ -7,7 +7,7 @@ cookie="$(cat cookie)"
 year="$1"
 day="$2"
 
-[ "$day" ]  || day="$(date +%d)"
+[ "$day" ]  || day="$(date +%e)"
 [ "$year" ] || year="$(date +%Y)"
 
 day="$(printf '%d' "$day")"
