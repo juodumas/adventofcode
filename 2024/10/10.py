@@ -1,28 +1,15 @@
-coords = {
-    x + 1j * y: int(height)
-    for y, line in enumerate(open(0))
-    for x, height in enumerate(line.strip())
-}
+coords = {x + 1j * y: int(h) for y, ln in enumerate(open(0)) for x, h in enumerate(ln.strip())}
 
-def go(coord, height, peaks=set(), paths=[], fork=False):
-    if height == 9: peaks.add(coord)
-    paths[-1].append(coord)
-    saved_path = paths[-1].copy()
-    fork = False
+def go(coord, height, paths=[]):
+    if height == 9:
+        paths.append(coord)
     for dir in (1 + 0j, 0 + 1j, -1 + 0j, 0 - 1j):
         if coords.get(coord + dir) == height + 1:
-            if fork: paths.append(saved_path.copy())
-            go(coord + dir, height + 1, peaks, paths, fork=fork)
-            fork = True
+            go(coord + dir, height + 1, paths)
 
-paths = []
-s1 = 0
+paths = {coord: [] for coord in coords}
 for coord, height in coords.items():
-    if height: continue
-    paths.append([])
-    peaks = set()
-    go(coord, height, peaks, paths)
-    if peaks: s1 += len(peaks)
+    if height == 0:
+        go(coord, height, paths[coord])
 
-# from viz import viz; viz(coords, paths[0])
-print(s1, sum(1 for path in paths if len(path) == 10))
+print(sum(len(set(path)) for path in paths.values()), sum(len(path) for path in paths.values()))
