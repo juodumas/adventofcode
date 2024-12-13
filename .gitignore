@@ -1,8 +1,10 @@
 *
 !**/
-!*.gitignore
-!*.js
 !*.gif
+!*.gitignore
+!*.jpg
+!*.js
 !*.png
 !*.py
 !*.sh
+!viz.html
