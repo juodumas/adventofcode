@@ -19,4 +19,4 @@ echo "https://adventofcode.com/$year/day/$day"
 [ -s input ] || curl -s -b "session=$cookie" "https://adventofcode.com/$year/day/$day/input" > input
 curl -s -b "session=$cookie" "https://adventofcode.com/$year/day/$day" > page.html
 touch "$day02.py" sample1.txt
-html2text page.html > page.txt
+html2text --ignore-emphasis page.html > page.txt
